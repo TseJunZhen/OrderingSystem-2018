@@ -1,0 +1,6 @@
+framework module Pods_OderingSystemUITests {
+  umbrella header "Pods-OderingSystemUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
