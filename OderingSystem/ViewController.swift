@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "plus_photo"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "plus_photo").withRenderingMode(.alwaysOriginal), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
         
@@ -28,6 +28,36 @@ class ViewController: UIViewController {
         return tf
         
     }()
+    let userNameTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Username"
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        tf.backgroundColor = UIColor(white: 0,alpha: 0.03)
+        tf.borderStyle = .roundedRect
+        tf.font = UIFont.systemFont(ofSize: 14)
+        return tf
+        
+    }()
+    let passwordTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Password"
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        tf.backgroundColor = UIColor(white: 0,alpha: 0.03)
+        tf.borderStyle = .roundedRect
+        tf.font = UIFont.systemFont(ofSize: 14)
+        return tf
+        
+    }()
+    
+    let signUpButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Sign Up", for: .normal)
+        button.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
+        button.layer.cornerRadius = 5
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.white, for: .normal)
+        return button
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(plusPhotoButton)
@@ -37,18 +67,26 @@ class ViewController: UIViewController {
         plusPhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         plusPhotoButton.topAnchor.constraint(equalTo: view.topAnchor, constant:40).isActive = true
         
-        view.addSubview(emailTextField)
+        setupInputField()
+    }
+    fileprivate func setupInputField() {
         
+        let stackView = UIStackView(arrangedSubviews: [emailTextField, userNameTextField, passwordTextField, signUpButton])
         
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        
+        view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            emailTextField.topAnchor.constraint(equalTo: plusPhotoButton.bottomAnchor, constant: 20),
-            emailTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
-            emailTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
-            emailTextField.heightAnchor.constraint(equalToConstant: 50)
+            stackView.topAnchor.constraint(equalTo: plusPhotoButton.bottomAnchor, constant: 20),
+            stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
+            stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
+            stackView.heightAnchor.constraint(equalToConstant: 200)
             ])
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
